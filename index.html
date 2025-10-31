@@ -23,8 +23,11 @@
     <label>Электронная почта:
       <input type="email" id="email" name="email" required>
     </label>
-    <label>Комментарий:
-      <textarea id="comment" name="comment"></textarea>
+    <label>Придёте ли вы:
+      <select id="coming" name="coming" required>
+        <option value="yes">Да</option>
+        <option value="no">Нет</option>
+      </select>
     </label>
     <label>Количество гостей:
       <select id="guests_count" name="guests_count" required>
@@ -37,22 +40,16 @@
     <label id="additional_names_label" style="display:none;">Имена сопровождающих:
       <input type="text" id="additional_names" name="additional_names" placeholder="Через запятую">
     </label>
+    <label>Комментарий:
+      <textarea id="comment" name="comment"></textarea>
+    </label>
     <button type="submit">Отправить RSVP</button>
   </form>
   <div id="message"></div>
 
   <script>
-    // Получаем параметры из URL
-    function getQueryParams() {
-      const params = {};
-      location.search.slice(1).split("&").forEach(pair => {
-        const [key, value] = pair.split("=");
-        if (key) params[key] = decodeURIComponent(value || "");
-      });
-      return params;
-    }
+    const params = Object.fromEntries(new URLSearchParams(window.location.search));
 
-    const params = getQueryParams();
     if (params.name) document.getElementById("name").value = params.name;
     if (params.guest_id) document.getElementById("guest_id").value = params.guest_id;
 
@@ -61,7 +58,7 @@
     const guestsCount = document.getElementById("guests_count");
     const additionalNamesLabel = document.getElementById("additional_names_label");
 
-    // Показываем поле для имён сопровождающих, если гостей больше одного
+    // Показываем поле для имён сопровождающих
     guestsCount.addEventListener("change", function() {
       if (parseInt(guestsCount.value) > 1) {
         additionalNamesLabel.style.display = "block";
@@ -75,19 +72,20 @@
       e.preventDefault();
 
       const data = {
-        name: document.getElementById("name").value,
         guest_id: document.getElementById("guest_id").value,
+        name: document.getElementById("name").value,
         email: document.getElementById("email").value,
-        comment: document.getElementById("comment").value,
+        coming: document.getElementById("coming").value,
         guests_count: guestsCount.value,
-        additional_names: document.getElementById("additional_names").value
+        additional_names: document.getElementById("additional_names").value,
+        comment: document.getElementById("comment").value
       };
 
       fetch("https://script.google.com/macros/s/AKfycbyKzJBDtUbrFFIVcGpxkH-BeerUN9EVlDiPJVEhtk4vCHQi03KCn_MmFgpJxAODD1xY/exec", {
         method: "POST",
         body: JSON.stringify(data)
       })
-      .then(response => response.json())
+      .then(resp => resp.json())
       .then(result => {
         message.textContent = "Спасибо — ответ сохранён!";
         form.reset();
