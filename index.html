@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Приглашение</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;padding:20px;background:#fffbe8;color:#222}
+    .card{max-width:720px;margin:20px auto;padding:20px;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,0.08);background:white}
+    h1{margin-top:0}
+    label{display:block;margin:10px 0 4px;font-weight:600}
+    input[type="text"], input[type="email"], select, textarea{width:100%;padding:8px;border-radius:6px;border:1px solid #ddd}
+    button{margin-top:12px;padding:10px 16px;border-radius:8px;border:0;background:#2176FF;color:white;font-weight:700}
+    .small{font-size:0.9em;color:#666}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="title">Приглашение</h1>
+    <p id="intro">Спасибо, что вы с нами — подтвердите, пожалуйста, участие ниже.</p>
+
+    <form id="rsvpForm">
+      <input type="hidden" id="guest_id" name="guest_id" />
+      <label>Имя</label>
+      <input type="text" id="guest_name" name="guest_name" required />
+
+      <label>Email (опционально)</label>
+      <input type="email" id="guest_email" name="guest_email" />
+
+      <label>Придёте?</label>
+      <select id="coming" name="coming" required>
+        <option value="">— выберите —</option>
+        <option value="yes">Приду</option>
+        <option value="no">Не смогу</option>
+        <option value="maybe">Возможно</option>
+      </select>
+
+      <label>Сколько гостей с вами (включая вас)</label>
+      <input type="text" id="guests_count" name="guests_count" placeholder="1" />
+
+      <label>Предпочтение по еде</label>
+      <select id="food_pref" name="food_pref">
+        <option value="">— выберите —</option>
+        <option value="meat">Мясо</option>
+        <option value="fish">Рыба</option>
+        <option value="veg">Вегетарианец</option>
+      </select>
+
+      <label>Аллергии / комментарии</label>
+      <textarea id="allergies" name="allergies" rows="3"></textarea>
+
+      <label class="small">Комментарий</label>
+      <textarea id="comment" name="comment" rows="2"></textarea>
+
+      <button type="submit">Отправить RSVP</button>
+    </form>
+
+    <div id="result" style="margin-top:16px;"></div>
+  </div>
+
+<script>
+  // --- CONFIG: вставь сюда URL своего Apps Script web app (из шага 2)
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyKzJBDtUbrFFIVcGpxkH-BeerUN9EVlDiPJVEhtk4vCHQi03KCn_MmFgpJxAODD1xY/exec";
+
+  // helper: parse query params
+  function getQueryParams() {
+    const qp = {};
+    location.search.slice(1).split("&").forEach(pair => {
+      if (!pair) return;
+      const [k,v] = pair.split("=").map(decodeURIComponent);
+      qp[k]=v;
+    });
+    return qp;
+  }
+
+  const params = getQueryParams();
+  // Предзаполнения: ?name=Иван&guest_id=123
+  if (params.name) document.getElementById('guest_name').value = params.name;
+  if (params.guest_id) document.getElementById('guest_id').value = params.guest_id;
+
+  const form = document.getElementById('rsvpForm');
+  const result = document.getElementById('result');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    result.textContent = "Отправка...";
+    const payload = {
+      guest_id: document.getElementById('guest_id').value || "",
+      guest_name: document.getElementById('guest_name').value || "",
+      guest_email: document.getElementById('guest_email').value || "",
+      coming: document.getElementById('coming').value || "",
+      guests_count: document.getElementById('guests_count').value || "",
+      food_pref: document.getElementById('food_pref').value || "",
+      allergies: document.getElementById('allergies').value || "",
+      comment: document.getElementById('comment').value || "",
+      user_agent: navigator.userAgent
+    };
+
+    try {
+      const resp = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      const data = await resp.json();
+      if (data.ok) {
+        result.innerHTML = "<b>Спасибо — ответ сохранён.</b>";
+        form.reset();
+      } else {
+        result.innerHTML = "<b>Ошибка:</b> " + (data.error || JSON.stringify(data));
+      }
+    } catch (err) {
+      result.innerHTML = "<b>Ошибка сети:</b> " + err.toString();
+    }
+  });
+</script>
+</body>
+</html>
