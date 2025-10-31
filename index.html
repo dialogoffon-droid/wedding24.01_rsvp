@@ -80,8 +80,9 @@
         additional_names: document.getElementById("additional_names").value,
         comment: document.getElementById("comment").value
       };
+     
 
-      fetch("https://script.google.com/macros/s/AKfycbwfvWLsIXTEiB_Hi9kUmc9Bb0g4GciJdPSvJSg0YIBf7uGlfYeNGOiAhJfvJWMfTcZ8/exec", {
+      fetch("https://script.google.com/macros/s/AKfycbzOyn7rEjILkTdf_f61rgvVaSAgWDh2GAaK2DHLqhidGzqboduOJVp0GRhyZS7tHkoi/exec", {
         method: "POST",
         body: JSON.stringify(data)
       })
