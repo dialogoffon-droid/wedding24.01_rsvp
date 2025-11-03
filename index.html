@@ -1,187 +1,9 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <title>Wedding — RSVP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Georgia", serif;
-      background: #fff;
-      color: #333;
-    }
-
-    /* === BASIC BLOCK STYLE === */
-    .section {
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .section h2 {
-      margin-top: 0;
-      font-size: 32px;
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    /* === TOP BLOCKS === */
-
-    .hero {
-      background: #f4f4f4;
-      padding: 120px 20px;
-      text-align: center;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .hero h1 {
-      margin: 0;
-      font-size: 48px;
-    }
-
-    .subhero {
-      background: #e9e4dd;
-      padding: 100px 20px;
-      text-align: center;
-    }
-
-    .subhero h3 {
-      margin: 0;
-      font-size: 26px;
-    }
-
-    /* === FORM === */
-
-    .rsvp-form {
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .rsvp-form input, 
-    .rsvp-form select,
-    .rsvp-form textarea {
-      padding: 10px;
-      font-size: 16px;
-    }
-
-    .rsvp-form button {
-      padding: 14px;
-      font-size: 18px;
-      background: black;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    .rsvp-form button:hover {
-      opacity: .8;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px;
-      font-size: 14px;
-      color: #777;
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- === TOP BLOCK 1 === -->
-  <div class="hero">
-    <h1>OUR WEDDING DAY</h1>
-    <p>15 августа 2025</p>
-  </div>
-
-  <!-- === TOP BLOCK 2 === -->
-  <div class="subhero">
-    <h3>Мы рады пригласить вас на торжество!</h3>
-  </div>
-
-  <!-- === SECTION: Приветствие === -->
-  <div class="section">
-    <h2>Приветствие</h2>
-    <p>
-      Дорогие друзья и близкие! Мы счастливы поделиться с вами самым волшебным моментом нашей жизни. 
-      День нашей свадьбы — день, когда две дороги соединяются в одну, а сердца начинают биться в унисон. 
-      Мы искренне рады, что вы разделите с нами эту радость.
-    </p>
-  </div>
-
-  <!-- === SECTION: Пожелания === -->
-  <div class="section" style="background:#fafafa;">
-    <h2>Пожелания</h2>
-    <p>
-      Ваши теплые слова, поддержка и любовь являются важнейшей частью нашего пути. 
-      Пожелания, сказанные от сердца, мы с благодарностью сохраним в памяти. 
-      Если вы хотите поделиться чем-то особенным — напишите нам!
-    </p>
-  </div>
-
-  <!-- === SECTION: История пары === -->
-  <div class="section">
-    <h2>История пары</h2>
-    <p>
-      Мы познакомились случайно, но с первой встречи знали — что-то в этом особенное. 
-      Наши истории переплелись, а дни стали светлее. Мы прошли долгий путь, полный открытий, 
-      путешествий и новых эмоций. Теперь нам не терпится написать следующую главу вместе.
-    </p>
-  </div>
-
-  <!-- === SECTION: Информация о торжестве === -->
-  <div class="section" style="background:#fafafa;">
-    <h2>Информация о торжестве</h2>
-    <p>
-      ⏰ Начало: 15:00  
-      <br>
-      📍 Место: Ресторан "Royal Garden", ул. Примерная, 21
-      <br><br>
-      Ждём вас вовремя — программа будет насыщенной! Мы позаботились, 
-      чтобы каждый гость чувствовал себя комфортно и уютно.
-    </p>
-  </div>
-
-  <!-- === SECTION: RSVP === -->
-  <div class="section">
-    <h2>RSVP</h2>
-
-    <form class="rsvp-form" id="rsvpForm">
-
-      <input type="text" id="guest_name" name="guest_name" placeholder="Ваше имя" required />
-
-      <select id="will_come" name="will_come" required>
-        <option value="">Вы придёте?</option>
-        <option value="yes">Да</option>
-        <option value="no">Нет</option>
-      </select>
-
-      <textarea id="message" name="message" placeholder="Комментарий (необязательно)" rows="4"></textarea>
-
-      <button type="submit">Отправить RSVP</button>
-
-      <div id="re
-=======
 <!DOCTYPE html>
-=======
-<!doctype html>
->>>>>>> b2018aa (Обновлен index.html и JS для показа сообщений)
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <title>Wedding — RSVP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
     body {
@@ -192,7 +14,6 @@
       color: #333;
     }
 
-    /* === BASIC BLOCK STYLE === */
     .section {
       padding: 60px 20px;
       max-width: 900px;
@@ -207,8 +28,6 @@
       margin-bottom: 25px;
     }
 
-    /* === TOP BLOCKS === */
-
     .hero {
       background: #f4f4f4;
       padding: 120px 20px;
@@ -217,10 +36,8 @@
       background-position: center;
     }
 
-    .hero h1 {
-      margin: 0;
-      font-size: 48px;
-    }
+    .hero h1 { font-size: 48px; margin: 0; }
+    .hero p { font-size: 20px; margin: 5px 0 0 0; }
 
     .subhero {
       background: #e9e4dd;
@@ -228,19 +45,14 @@
       text-align: center;
     }
 
-    .subhero h3 {
-      margin: 0;
-      font-size: 26px;
-    }
-
-    /* === FORM === */
+    .subhero h3 { font-size: 26px; margin: 0; }
 
     .rsvp-form {
       max-width: 500px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       margin-top: 20px;
     }
 
@@ -249,6 +61,8 @@
     .rsvp-form textarea {
       padding: 10px;
       font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
 
     .rsvp-form button {
@@ -257,12 +71,14 @@
       background: black;
       color: white;
       border: none;
+      border-radius: 5px;
       cursor: pointer;
+      transition: 0.3s;
     }
 
-    .rsvp-form button:hover {
-      opacity: .8;
-    }
+    .rsvp-form button:hover { opacity: 0.8; }
+
+    #response { text-align: center; font-weight: bold; margin-top: 10px; }
 
     footer {
       text-align: center;
@@ -272,82 +88,59 @@
     }
   </style>
 </head>
-
 <body>
 
-  <!-- === TOP BLOCK 1 === -->
   <div class="hero">
     <h1>OUR WEDDING DAY</h1>
     <p>15 августа 2025</p>
   </div>
 
-  <!-- === TOP BLOCK 2 === -->
   <div class="subhero">
     <h3>Мы рады пригласить вас на торжество!</h3>
   </div>
 
-  <!-- === SECTION: Приветствие === -->
   <div class="section">
     <h2>Приветствие</h2>
-    <p>
-      Дорогие друзья и близкие! Мы счастливы поделиться с вами самым волшебным моментом нашей жизни. 
+    <p>Дорогие друзья и близкие! Мы счастливы поделиться с вами самым волшебным моментом нашей жизни. 
       День нашей свадьбы — день, когда две дороги соединяются в одну, а сердца начинают биться в унисон. 
-      Мы искренне рады, что вы разделите с нами эту радость.
-    </p>
+      Мы искренне рады, что вы разделите с нами эту радость.</p>
   </div>
 
-  <!-- === SECTION: Пожелания === -->
   <div class="section" style="background:#fafafa;">
     <h2>Пожелания</h2>
-    <p>
-      Ваши теплые слова, поддержка и любовь являются важнейшей частью нашего пути. 
-      Пожелания, сказанные от сердца, мы с благодарностью сохраним в памяти. 
-      Если вы хотите поделиться чем-то особенным — напишите нам!
-    </p>
+    <p>Ваши теплые слова, поддержка и любовь являются важнейшей частью нашего пути. 
+       Пожелания, сказанные от сердца, мы с благодарностью сохраним в памяти. 
+       Если вы хотите поделиться чем-то особенным — напишите нам!</p>
   </div>
 
-  <!-- === SECTION: История пары === -->
   <div class="section">
     <h2>История пары</h2>
-    <p>
-      Мы познакомились случайно, но с первой встречи знали — что-то в этом особенное. 
-      Наши истории переплелись, а дни стали светлее. Мы прошли долгий путь, полный открытий, 
-      путешествий и новых эмоций. Теперь нам не терпится написать следующую главу вместе.
-    </p>
+    <p>Мы познакомились случайно, но с первой встречи знали — что-то в этом особенное. 
+       Наши истории переплелись, а дни стали светлее. Мы прошли долгий путь, полный открытий, 
+       путешествий и новых эмоций. Теперь нам не терпится написать следующую главу вместе.</p>
   </div>
 
-  <!-- === SECTION: Информация о торжестве === -->
   <div class="section" style="background:#fafafa;">
     <h2>Информация о торжестве</h2>
-    <p>
-      ⏰ Начало: 15:00  
-      <br>
-      📍 Место: Ресторан "Royal Garden", ул. Примерная, 21
-      <br><br>
-      Ждём вас вовремя — программа будет насыщенной! Мы позаботились, 
-      чтобы каждый гость чувствовал себя комфортно и уютно.
-    </p>
+    <p>⏰ Начало: 15:00<br>
+       📍 Место: Ресторан "Royal Garden", ул. Примерная, 21<br><br>
+       Ждём вас вовремя — программа будет насыщенной! Мы позаботились, 
+       чтобы каждый гость чувствовал себя комфортно и уютно.</p>
   </div>
 
-  <!-- === SECTION: RSVP === -->
   <div class="section">
     <h2>RSVP</h2>
-
     <form class="rsvp-form" id="rsvpForm">
-
-      <input type="text" id="guest_name" name="guest_name" placeholder="Ваше имя" required />
-
+      <input type="text" id="guest_name" name="guest_name" placeholder="Ваше имя" required>
       <select id="will_come" name="will_come" required>
         <option value="">Вы придёте?</option>
         <option value="yes">Да</option>
         <option value="no">Нет</option>
       </select>
-
       <textarea id="message" name="message" placeholder="Комментарий (необязательно)" rows="4"></textarea>
-
+      <input type="hidden" id="guest_id" name="guest_id" value="">
       <button type="submit">Отправить RSVP</button>
-
-      <div id="response" style="margin-top:15px;text-align:center;"></div>
+      <div id="response"></div>
     </form>
   </div>
 
@@ -355,53 +148,22 @@
     © 2025 — Наш день
   </footer>
 
-
-  <!-- === SCRIPT === -->
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9DDyFfGpY0GdzoRzmAjxcqxD7NNZvMSfOTKAXffEZRiB_45-Fuax985UVPvxTn8NT/exec";
 
-    // чтение параметров из URL
-    function getParams() {
-      const p = new URLSearchParams(location.search);
-      return {
-        name: p.get("name") || "",
-        id: p.get("id") || ""
-      };
-    }
+    // Подстановка параметров из URL
+    const params = Object.fromEntries(new URLSearchParams(window.location.search));
+    if(params.name) document.getElementById("guest_name").value = params.name;
+    if(params.id) document.getElementById("guest_id").value = params.id;
 
-    const params = getParams();
-    if (params.name) {
-      document.getElementById("guest_name").value = params.name;
-    }
-
-    // отправка формы
     document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       const guest_name = document.getElementById("guest_name").value.trim();
       const will_come = document.getElementById("will_come").value.trim();
       const message = document.getElementById("message").value.trim();
+      const guest_id = document.getElementById("guest_id").value;
 
-      const body = {
-        guest_name,
-        will_come,
-        message,
-        guest_id: params.id
-      };
-
-<<<<<<< HEAD
-      fetch("https://script.google.com/macros/s/AKfycbw9DDyFfGpY0GdzoRzmAjxcqxD7NNZvMSfOTKAXffEZRiB_45-Fuax985UVPvxTn8NT/exec", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(resp => resp.json())
-      .then(result => {
-        if(result.status === "success"){
-          message.textContent = "Спасибо — ответ сохранён!";
-          form.reset();
-          if(params.name) document.getElementById("name").value = params.name;
-          if(params.guest_id) document.getElementById("guest_id").value = params.guest_id;
-=======
+      const body = { guest_name, will_come, message, guest_id };
       const resEl = document.getElementById("response");
       resEl.innerText = "Отправляем...";
 
@@ -411,18 +173,17 @@
           body: JSON.stringify(body),
           headers: { "Content-Type": "application/json" }
         });
-
         const data = await r.json();
-
         if (data.status === "success") {
           resEl.innerText = "✅ Ответ сохранён! Спасибо!";
->>>>>>> b2018aa (Обновлен index.html и JS для показа сообщений)
+          document.getElementById("rsvpForm").reset();
+          if(params.name) document.getElementById("guest_name").value = params.name;
+          if(params.id) document.getElementById("guest_id").value = params.id;
         } else {
           resEl.innerText = "⚠ Ошибка при отправке.";
         }
-
-      } catch (e) {
-        console.log(e);
+      } catch (err) {
+        console.error(err);
         resEl.innerText = "❌ Ошибка сети.";
       }
     });
@@ -430,4 +191,3 @@
 
 </body>
 </html>
->>>>>>> dc09541 (Update RSVP form with new Apps Script URL)
