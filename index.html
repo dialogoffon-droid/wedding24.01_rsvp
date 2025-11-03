@@ -1,103 +1,155 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>RSVP</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Свадебное приглашение</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; max-width: 500px; margin: auto; }
-    label { display: block; margin-top: 10px; }
-    input, textarea, select { width: 100%; padding: 5px; margin-top: 5px; }
-    button { margin-top: 15px; padding: 10px 20px; }
-    #message { margin-top: 15px; font-weight: bold; color: green; }
+    body { font-family: Arial, sans-serif; padding:20px; max-width:600px; margin:auto; }
+    label { display:block; margin-top:10px; }
+    input, select, textarea, button { width:100%; padding:8px; margin-top:5px; }
+    button { cursor:pointer; margin-top:20px; }
+    #message { margin-top:15px; font-weight:bold;color:green; }
+    header nav a { margin-right:10px; text-decoration:none;color:#333; }
+    .container { margin-top:40px; }
   </style>
 </head>
 <body>
-  <h1>ОТВЕТНОЕ ПРИГЛАШЕНИЕ</h1>
-  <form id="rsvpForm">
-    <label>Имя:
-      <input type="text" id="name" name="name" required>
-    </label>
-    <label>Идентификатор гостя:
-      <input type="text" id="guest_id" name="guest_id" required>
-    </label>
-    <label>Электронная почта:
-      <input type="email" id="email" name="email" required>
-    </label>
-    <label>Придёте ли вы:
-      <select id="coming" name="coming" required>
-        <option value="yes">Да</option>
-        <option value="no">Нет</option>
-      </select>
-    </label>
-    <label>Количество гостей:
-      <select id="guests_count" name="guests_count" required>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-    </label>
-    <label id="additional_names_label" style="display:none;">Имена сопровождающих:
-      <input type="text" id="additional_names" name="additional_names" placeholder="Через запятую">
-    </label>
-    <label>Комментарий:
-      <textarea id="comment" name="comment"></textarea>
-    </label>
-    <button type="submit">Отправить RSVP</button>
-  </form>
-  <div id="message"></div>
 
-  <script>
-    const params = Object.fromEntries(new URLSearchParams(window.location.search));
+<header id="site-header">
+  <div class="container">
+    <h1>Иван & Мария</h1>
+    <nav>
+      <a href="#hero">Главная</a>
+      <a href="#where">Где</a>
+      <a href="#schedule">План дня</a>
+      <a href="#details">Детали</a>
+      <a href="#rsvp">RSVP</a>
+    </nav>
+  </div>
+</header>
 
-    if (params.name) document.getElementById("name").value = params.name;
-    if (params.guest_id) document.getElementById("guest_id").value = params.guest_id;
+<main>
 
-    const form = document.getElementById("rsvpForm");
-    const message = document.getElementById("message");
-    const guestsCount = document.getElementById("guests_count");
-    const additionalNamesLabel = document.getElementById("additional_names_label");
+  <section id="hero" class="container">
+    <h2>Приглашение на свадьбу</h2>
+    <p>Дорогие гости! Мы будем рады видеть вас.</p>
+    <div id="countdown"></div>
+  </section>
 
-    // Показываем поле для имён сопровождающих
-    guestsCount.addEventListener("change", function() {
-      if (parseInt(guestsCount.value) > 1) {
-        additionalNamesLabel.style.display = "block";
-      } else {
-        additionalNamesLabel.style.display = "none";
-      }
+  <section id="where" class="container">
+    <h3>Где</h3>
+    <p>Место проведения: улица Примерная, город Примерск.</p>
+    <iframe
+      width="100%"
+      height="300"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!…"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"></iframe>
+  </section>
+
+  <section id="schedule" class="container">
+    <h3>План дня</h3>
+    <ul id="schedule-list">
+      <li>16:00 — Торжественная регистрация</li>
+      <li>18:00 — Праздничный ужин</li>
+    </ul>
+  </section>
+
+  <section id="details" class="container">
+    <h3>Детали</h3>
+    <p>Парковка: адрес…, Жильё: адрес…, Подарки: по желанию.</p>
+  </section>
+
+  <section id="rsvp" class="container">
+    <h3>Анкета RSVP</h3>
+
+    <form id="rsvpForm">
+      <label>Имя: <input type="text" id="name" name="name" required></label>
+      <label>ID гостя: <input type="text" id="guest_id" name="guest_id" required></label>
+      <label>Email: <input type="email" id="email" name="email" required></label>
+      <label>Придёте ли вы:
+        <select id="coming" name="coming" required>
+          <option value="yes">Да</option>
+          <option value="no">Нет</option>
+        </select>
+      </label>
+      <label>Количество гостей:
+        <select id="guests_count" name="guests_count" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select>
+      </label>
+      <label id="additional_names_label" style="display:none;">Имена сопровождающих:
+        <input type="text" id="additional_names" name="additional_names" placeholder="Через запятую">
+      </label>
+      <label>Комментарий:
+        <textarea id="comment" name="comment"></textarea>
+      </label>
+      <button type="submit">Отправить RSVP</button>
+    </form>
+
+    <div id="message"></div>
+
+  </section>
+
+</main>
+
+<footer class="container">&copy; 2025</footer>
+
+<script>
+  const params = Object.fromEntries(new URLSearchParams(window.location.search));
+  if(params.name) document.getElementById("name").value = params.name;
+  if(params.guest_id) document.getElementById("guest_id").value = params.guest_id;
+
+  const form = document.getElementById("rsvpForm");
+  const message = document.getElementById("message");
+  const guestsCount = document.getElementById("guests_count");
+  const additionalNamesLabel = document.getElementById("additional_names_label");
+
+  guestsCount.addEventListener("change", function(){
+    if(parseInt(guestsCount.value) > 1){
+      additionalNamesLabel.style.display = "block";
+    } else {
+      additionalNamesLabel.style.display = "none";
+    }
+  });
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const data = {
+      guest_id: document.getElementById("guest_id").value,
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      coming: document.getElementById("coming").value,
+      guests_count: guestsCount.value,
+      additional_names: document.getElementById("additional_names").value,
+      comment: document.getElementById("comment").value
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbwb9nu94j98-cAJqwOMwqEuuAIl27SY7P3oEXaLMEspUMFaLM87faCmohOlZImNuwDV/exec", {
+      method:"POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .then(r=>r.json())
+    .then(result=>{
+      message.textContent = "Спасибо — ответ сохранён!";
+      form.reset();
+      if(params.name) document.getElementById("name").value = params.name;
+      if(params.guest_id) document.getElementById("guest_id").value = params.guest_id;
+    })
+    .catch(error=>{
+      console.error("Ошибка отправки:", error);
+      message.textContent = "Ошибка отправки, попробуйте позже.";
     });
 
-    // Отправка формы на Google Sheets
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
+  });
+</script>
 
-      const data = {
-        guest_id: document.getElementById("guest_id").value,
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        coming: document.getElementById("coming").value,
-        guests_count: guestsCount.value,
-        additional_names: document.getElementById("additional_names").value,
-        comment: document.getElementById("comment").value
-      };
-     
-
-      fetch("https://script.google.com/macros/s/AKfycbzOyn7rEjILkTdf_f61rgvVaSAgWDh2GAaK2DHLqhidGzqboduOJVp0GRhyZS7tHkoi/exec", {
-        method: "POST",
-        body: JSON.stringify(data)
-      })
-      .then(resp => resp.json())
-      .then(result => {
-        message.textContent = "Спасибо — ответ сохранён!";
-        form.reset();
-        if (params.name) document.getElementById("name").value = params.name;
-        if (params.guest_id) document.getElementById("guest_id").value = params.guest_id;
-      })
-      .catch(error => {
-        console.error("Ошибка:", error);
-        message.textContent = "Ошибка отправки, попробуйте позже.";
-      });
-    });
-  </script>
 </body>
 </html>
