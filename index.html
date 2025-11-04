@@ -35,13 +35,23 @@
   <h2>RSVP</h2>
   <form class="rsvp-form" id="rsvpForm">
     <input type="text" id="guest_name" name="guest_name" placeholder="Ваше имя" required>
-    <select id="will_come" name="will_come" required>
+    <input type="text" id="guest_surname" name="guest_surname" placeholder="Ваша фамилия" required>
+    
+    <select id="coming" name="coming" required>
       <option value="">Вы придёте?</option>
       <option value="yes">Да</option>
       <option value="no">Нет</option>
     </select>
-    <textarea id="message" name="message" placeholder="Комментарий (необязательно)" rows="4"></textarea>
-    <input type="hidden" id="guest_id" name="guest_id" value="">
+    
+    <select id="coming_alone" name="coming_alone">
+      <option value="">Придёте один?</option>
+      <option value="yes">Да</option>
+      <option value="no">Нет</option>
+    </select>
+    
+    <input type="text" id="guests_names" name="guests_names" placeholder="Имена сопровождающих (если есть)">
+    <input type="number" id="guests_count" name="guests_count" placeholder="Количество гостей">
+
     <button type="submit">Отправить RSVP</button>
     <div id="response"></div>
   </form>
@@ -50,25 +60,20 @@
 <footer>© 2026 — Наш день</footer>
 
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyxIZamgG22NQB1nD2gy3-5eyE4LAiQb02c6t5EGkJTw-vMU8VfOTuyUC5WLKYqh3HkFg/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzrU6KazuDtqin3acjvmoUUFGkrBEcICAV0lBuMX67EtLJ8KnixyNlQ62Tf5gv58IYr/exec";
 
 document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const formData = new URLSearchParams();
-  formData.append("guest_name", document.getElementById("guest_name").value.trim());
-  formData.append("will_come", document.getElementById("will_come").value.trim());
-  formData.append("message", document.getElementById("message").value.trim());
-  formData.append("guest_id", document.getElementById("guest_id").value);
+  ["guest_name","guest_surname","coming","coming_alone","guests_names","guests_count"]
+    .forEach(id => formData.append(id, document.getElementById(id).value.trim()));
 
   const resEl = document.getElementById("response");
   resEl.innerText = "Отправляем...";
 
   try {
-    const r = await fetch(SCRIPT_URL, {
-      method: "POST",
-      body: formData // обход preflight CORS
-    });
+    const r = await fetch(SCRIPT_URL, { method: "POST", body: formData });
     const data = await r.json();
     if(data.status === "success") {
       resEl.innerText = "✅ Ответ сохранён! Спасибо!";
