@@ -149,22 +149,27 @@
   </footer>
 
   <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyz7WXZ-WYZev7z-wTdGvd5Us5jdkE9Dhu9jLX57Oc7Vbu1zdw9hnXiDjyiJihMgmNIAA/exec";
+    // URL вашего Apps Script
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwS9Ff8D-wktfL1OvzSThmp_nTntlVgHqCFQuPxJoqBTmEps4jAOXNSV2vr98WssacHTw/exec";
 
-    // Подстановка параметров из URL
+    const form = document.getElementById("rsvpForm");
+    const resEl = document.getElementById("response");
+
+    // Подстановка параметров из URL (если нужно)
     const params = Object.fromEntries(new URLSearchParams(window.location.search));
     if(params.name) document.getElementById("guest_name").value = params.name;
     if(params.id) document.getElementById("guest_id").value = params.id;
 
-    document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const guest_name = document.getElementById("guest_name").value.trim();
-      const will_come = document.getElementById("will_come").value.trim();
-      const message = document.getElementById("message").value.trim();
-      const guest_id = document.getElementById("guest_id").value;
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault(); // Отключаем стандартное поведение формы
 
-      const body = { guest_name, will_come, message, guest_id };
-      const resEl = document.getElementById("response");
+      const body = {
+        guest_name: document.getElementById("guest_name").value.trim(),
+        will_come: document.getElementById("will_come").value.trim(),
+        message: document.getElementById("message").value.trim(),
+        guest_id: document.getElementById("guest_id").value
+      };
+
       resEl.innerText = "Отправляем...";
 
       try {
@@ -174,17 +179,18 @@
           headers: { "Content-Type": "application/json" }
         });
         const data = await r.json();
+
         if (data.status === "success") {
           resEl.innerText = "✅ Ответ сохранён! Спасибо!";
-          document.getElementById("rsvpForm").reset();
+          form.reset();
           if(params.name) document.getElementById("guest_name").value = params.name;
           if(params.id) document.getElementById("guest_id").value = params.id;
         } else {
-          resEl.innerText = "⚠ Ошибка при отправке.";
+          resEl.innerText = "⚠ Ошибка при отправке: " + (data.message || "неизвестная ошибка");
         }
       } catch (err) {
         console.error(err);
-        resEl.innerText = "❌ Ошибка сети.";
+        resEl.innerText = "❌ Ошибка сети: " + err.message;
       }
     });
   </script>
