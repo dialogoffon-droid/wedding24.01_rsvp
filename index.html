@@ -148,52 +148,37 @@
     © 2026 — Наш день
   </footer>
 
-  <script>
-    // URL вашего Apps Script
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx_-t-_8p0QhCj7MWdr0qKdqUHz8a0xqCqUKlfCGxo1AesuWIJjRpYRAg4KoS-vzzRudQ/exec";
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx_-t-_8p0QhCj7MWdr0qKdqUHz8a0xqCqUKlfCGxo1AesuWIJjRpYRAg4KoS-vzzRudQ/exec"; // твой URL
 
-    const form = document.getElementById("rsvpForm");
-    const resEl = document.getElementById("response");
+document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
+  e.preventDefault(); // чтобы не перезагружалась страница
 
-    // Подстановка параметров из URL (если нужно)
-    const params = Object.fromEntries(new URLSearchParams(window.location.search));
-    if(params.name) document.getElementById("guest_name").value = params.name;
-    if(params.id) document.getElementById("guest_id").value = params.id;
+  const form = e.target;
+  const responseBox = document.getElementById("response");
+  responseBox.textContent = "⏳ Отправка...";
 
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault(); // Отключаем стандартное поведение формы
+  // 👇 используем URLSearchParams, чтобы обойти CORS preflight
+  const formData = new URLSearchParams();
+  formData.append("guest_name", form.guest_name.value.trim());
+  formData.append("will_come", form.will_come.value.trim());
+  formData.append("message", form.message.value.trim());
+  formData.append("guest_id", form.guest_id.value);
 
-      const body = {
-        guest_name: document.getElementById("guest_name").value.trim(),
-        will_come: document.getElementById("will_come").value.trim(),
-        message: document.getElementById("message").value.trim(),
-        guest_id: document.getElementById("guest_id").value
-      };
-
-      resEl.innerText = "Отправляем...";
-
-      try {
-        const r = await fetch(SCRIPT_URL, {
-          method: "POST",
-          body: JSON.stringify(body),
-          headers: { "Content-Type": "application/json" }
-        });
-        const data = await r.json();
-
-        if (data.status === "success") {
-          resEl.innerText = "✅ Ответ сохранён! Спасибо!";
-          form.reset();
-          if(params.name) document.getElementById("guest_name").value = params.name;
-          if(params.id) document.getElementById("guest_id").value = params.id;
-        } else {
-          resEl.innerText = "⚠ Ошибка при отправке: " + (data.message || "неизвестная ошибка");
-        }
-      } catch (err) {
-        console.error(err);
-        resEl.innerText = "❌ Ошибка сети: " + err.message;
-      }
+  try {
+    const r = await fetch(SCRIPT_URL, {
+      method: "POST",
+      body: formData, // ⬅️ без headers — браузер отправит как x-www-form-urlencoded
     });
-  </script>
+
+    const data = await r.text(); // Apps Script может вернуть текст
+    responseBox.textContent = "✅ Ответ отправлен!";
+    console.log("Ответ сервера:", data);
+    form.reset();
+  } catch (err) {
+    console.error("Ошибка:", err);
+    responseBox.textContent = "❌ Ошибка сети: " + err.messa
+
 
 </body>
 </html>
